@@ -6,16 +6,16 @@
 #define GAMER_WEBSOCKET_H
 
 #include <string>
-namespace gamer{
+
+namespace gamer {
     class websocket {
     public:
-        explicit websocket(std::string host, std::string path);
+        explicit websocket(std::string &&, std::string &&);
 
     private:
         int socket;
     };
 }
-
 
 
 #endif //GAMER_WEBSOCKET_H

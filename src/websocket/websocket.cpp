@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 
 namespace gamer {
-    websocket::websocket(std::string host, std::string path) {
+    websocket::websocket(std::string &&host, std::string &&path) {
         socket = ::socket(AF_INET, SOCK_STREAM, 0);
     }
 }
