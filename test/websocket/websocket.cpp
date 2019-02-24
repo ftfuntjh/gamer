@@ -6,7 +6,7 @@
 #include "gmock/gmock.h"
 
 TEST(GAMER_WEBSOCKET, websocket_init_test) {
-    gamer::websocket w{std::string("test"), std::string("/test")};
+    gamer::websocket w(std::string("test"), std::string("/test"));
 }
 
 int main(int argc, char **argv) {

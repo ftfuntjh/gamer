@@ -10,7 +10,11 @@
 namespace gamer {
     class websocket {
     public:
-        explicit websocket(std::string &&, std::string &&);
+        websocket(std::string &&host,
+                  std::string &&path,
+                  std::string &&ip = std::string{"0.0.0.0"},
+                  unsigned short int &&port = 8081);
+
 
     private:
         int socket;
