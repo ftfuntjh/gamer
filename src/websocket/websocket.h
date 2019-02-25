@@ -5,20 +5,24 @@
 #ifndef GAMER_WEBSOCKET_H
 #define GAMER_WEBSOCKET_H
 
+#include "worker.h"
 #include <string>
 
 namespace gamer {
-    class websocket {
-    public:
-        websocket(std::string &&host,
-                  std::string &&path,
-                  std::string &&ip = std::string{"0.0.0.0"},
-                  unsigned short int &&port = 8081);
+    namespace websocket {
+        class websocket : public worker {
+        public:
+            websocket(std::string &&host,
+                      std::string &&path,
+                      std::string &&ip = std::string{"0.0.0.0"},
+                      unsigned short int &&port = 8081);
 
+        private:
+            void start_worker();
 
-    private:
-        int socket;
-    };
+            int socket;
+        };
+    }
 }
 
 
