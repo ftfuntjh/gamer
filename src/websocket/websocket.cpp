@@ -3,9 +3,11 @@
 //
 
 #include "websocket.h"
+#include <iostream>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -20,18 +22,29 @@ namespace gamer {
                              string &&ip,
                              unsigned short int &&port) {
             socket = ::socket(AF_INET, SOCK_STREAM, 0);
+            if (socket == -1) {
+                throw runtime_error("socket failed");
+            }
             sockaddr_in server_addr{};
+            memset(&server_addr, 0, sizeof(server_addr));
             server_addr.sin_family = AF_INET;
             server_addr.sin_port = htons(port);
-            ::inet_pton(AF_INET, ip.c_str(), static_cast<void *>(&server_addr));
-            if (::bind(socket, reinterpret_cast<sockaddr *>(&server_addr), sizeof(server_addr)) < 0) {
+            server_addr.sin_addr.s_addr = ::inet_addr(ip.c_str());
+            if (::bind(socket, reinterpret_cast<sockaddr *> (&server_addr), sizeof(server_addr)) < 0) {
                 throw runtime_error("bind port error");
             }
         }
 
         void websocket::start_worker() {
-
+            sockaddr_in client_addr{};
+            socklen_t socklen;
+            if (::listen(socket, 20) < 0) {
+                throw runtime_error("listen failed");
+            };
+            if (::accept(socket, reinterpret_cast< sockaddr *>(&client_addr), &socklen) < 0) {
+                cout << ::strerror(errno) << endl;
+                throw runtime_error("accept client connection failed");
+            }
         }
     }
-
 }
