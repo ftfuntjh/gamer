@@ -8,4 +8,4 @@ add_library(${PROJECT_NAME}
         ../utils/log.cpp ../utils/log.h)
 
 target_link_libraries(${PROJECT_NAME} pthread gamer_utlis)
-add_dependencies(gamer_utils)
+add_dependencies(gamer_websocket gamer_utils)
