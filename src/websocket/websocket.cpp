@@ -8,6 +8,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <errno.h>
+#include <cstring>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -20,7 +21,8 @@ namespace gamer {
         websocket::websocket(string &&host,
                              string &&path,
                              string &&ip,
-                             unsigned short int &&port) {
+                             unsigned short int &&port)
+                : worker(port) {
             socket = ::socket(AF_INET, SOCK_STREAM, 0);
             if (socket == -1) {
                 throw runtime_error("socket failed");

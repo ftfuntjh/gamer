@@ -20,7 +20,7 @@ namespace gamer {
                 stopped
             };
 
-            explicit worker();
+            explicit worker(int socket);
 
             ~ worker();
 
@@ -36,9 +36,12 @@ namespace gamer {
 
             virtual void notice();
 
+            virtual void run();
+
         private:
             std::string id;
-
+            int socket;
+            worker_status state;
             std::mutex m;
             std::thread t;
             std::condition_variable c_v;

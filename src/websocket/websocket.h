@@ -14,7 +14,7 @@ namespace gamer {
         public:
             websocket(std::string &&host,
                       std::string &&path,
-                      std::string &&ip = std::string{"192.168.2.122"},
+                      std::string &&ip = std::string{"127.0.0.1"},
                       unsigned short int &&port = 8082);
 
             void start_worker();
