@@ -9,6 +9,14 @@ namespace gamer {
     namespace utils {
         class log {
         public:
+            static std::shared_ptr <log> getInstance(std::string file_path) {
+                static std::shared_ptr <log> instance_ptr = nullptr;
+                if (!instance_ptr) {
+                    instance_ptr = std::make_shared<log>(file_path);;
+                }
+                return instance_ptr;
+            }
+
             log(std::string file_path) : log(file_path, false, std::string(LOG_DEFAULT_OUTPUT_FORMAT)) {
 
             }
@@ -34,6 +42,10 @@ namespace gamer {
 
             template<class ...Args>
             void warn(Args &&args);
+
+            void message(std::string &&message) {
+
+            }
 
         private:
             std::string format;
