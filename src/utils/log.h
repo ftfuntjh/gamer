@@ -21,7 +21,8 @@ namespace gamer {
                 return instance_ptr;
             }
 
-            log(std::string file_path) : log(std::move(file_path), false, std::string(LOG_DEFAULT_OUTPUT_FORMAT)) {
+            explicit log(std::string file_path) : log(std::move(file_path), false,
+                                                      std::string(LOG_DEFAULT_OUTPUT_FORMAT)) {
 
             }
 
@@ -53,7 +54,7 @@ namespace gamer {
         private:
             std::string format;
         };
-    }
+    };
 }
 
 

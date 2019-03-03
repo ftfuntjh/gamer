@@ -4,15 +4,15 @@
 
 #include "websocket.h"
 #include <iostream>
+#include <exception>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include <errno.h>
 #include <cstring>
+#include <cerrno>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <exception>
 
 using namespace std;
 
